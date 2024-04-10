@@ -1,0 +1,27 @@
+{% extends "front/base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}Atualização de Pacientes{% endblock %}
+
+{% block conteudo %}
+<div class="container pt-5" style="margin-right: 25em;">
+    <div>
+        <h3 class="text-center pb-4">Atualização de Pacientes</h3>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Nome</span>
+                {% render_field form.name class+="form-control" %}
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Data de nascimento</span>
+                {% render_field form.birth_date class+="form-control" %}
+            </div>
+            
+            <button class="btn btn-primary">Atualizar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

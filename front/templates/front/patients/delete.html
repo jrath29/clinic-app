@@ -1,0 +1,31 @@
+{% extends "front/base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}Exclusão de Pacientes{% endblock %}
+
+{% block conteudo %}
+<div class="container mt-5" style="margin-right: 25em">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Exclusão de Pacientes</h5>
+
+            <p class="card-text">
+                Você tem certeza que quer excluir o paciente <b>{{ patient.name }}</b>?
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <hr/>
+                <div class="text-end">
+                    <a href="{% url 'index' %}" class="btn btn-outline-danger">
+                        Cancelar
+                    </a>
+                    <button class="btn btn-danger">Excluir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
