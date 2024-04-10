@@ -1,0 +1,44 @@
+<!-- Estendemos do template base -->
+{% extends "front/base.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+<!-- Bloco que define o <title></title> da nossa página -->
+{% block title %}Clinic{% endblock %}
+
+<!-- Bloco de conteúdo da nossa página --> 
+{% block conteudo %}
+<div class="container pt-5" style="margin-right: 25em;">
+    <div>
+        <h2 class="text-center">Consultas</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class=" text-center alert-dismissible fade show alert alert-{{ message.tags }}" style="margin-top: 1em;">
+                    {{ message|safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <a class="btn btn-primary mt-2" href="{% url 'create_appointment' %}" style="float: right">Cadastrar Consulta</a>
+    </div>
+
+    <div style="display: flex; gap: 3em; padding-top: 6em; flex-wrap: wrap; margin-left: 10em;">
+        {% if appointments %}
+            {% for appointment in appointments %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ appointment.title }}</h5>
+                    <p class="card-text">Doutor: {{ appointment.doctor }}</p>
+                    <p class="card-text">Começo: {{ appointment.start }}</p>
+                    <p class="card-text">Fim: {{ appointment.end }}</p>
+                    <a href="{% url 'update_appointment' pk=appointment.pk %}" class="btn btn-outline-primary">Atualizar</a>
+                    <a href="{% url 'delete_appointment' pk=appointment.pk %}" class="btn btn-danger">Deletar</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center pt-5" style="margin-top: 2em;">Sem consultas cadastradas :(</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
