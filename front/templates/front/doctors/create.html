@@ -1,0 +1,33 @@
+{% extends "front/base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}Cadastro de Doutores{% endblock %}
+
+{% block conteudo %}
+<div class="container pt-5" style="margin-right: 25em;">
+    <div>
+        <h3 class="text-center pb-4">Cadastro de Doutores</h3>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Nome</span>
+                {% render_field form.name class+="form-control" %}
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Especialidade</span>
+                {% render_field form.specialty class+="form-control" %}
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Data de nascimento</span>
+                {% render_field form.birth_date type="date" class+="form-control" %}
+            </div>
+           
+            <div class="pt-2" style="margin-left: 37.5em">
+                <button class="btn btn-primary">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
