@@ -1,0 +1,54 @@
+<!-- Estendemos do template base -->
+{% extends "front/base.html" %}
+
+{% load widget_tweaks %}
+<!-- Bloco que define o <title></title> da nossa página -->
+{% block title %}Doutores{% endblock %}
+
+<!-- Bloco de conteúdo da nossa página --> 
+{% block conteudo %}
+<div class="container pt-5" style="margin-right: 25em;">
+    <div>
+        <h2 class="text-center">Doutores</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class=" text-center alert-dismissible fade show alert alert-{{ message.tags }}" style="margin-top: 1em;">
+                    {{ message|safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <a class="btn btn-primary mt-2" href="{% url 'create_doctor' %}" style="float: right">Cadastrar Doutor</a>
+    </div>
+
+    {% if doctors %}
+        <table class="table table-striped" style="margin-top: 5em">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Especialidade</th>
+                    <th class="text-center">Data de nascimento</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doctor in doctors %}
+                <tr>
+                    <td><strong>{{ doctor.pk }}</strong></td>
+                    <td class="text-center">{{ doctor.name }}</td>
+                    <td class="text-center">{{ doctor.specialty }}</td>
+                    <td class="text-center">{{ doctor.birth_date }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-outline-primary" href="{% url 'update_doctor' pk=doctor.pk %}">Atualizar</a>
+                        <a class="btn btn-outline-danger" href="{% url 'delete_doctor' pk=doctor.pk %}">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-center pt-5" style="margin-top: 2em;">Sem doutores cadastrados :(</p>
+    {% endif %}
+</div>
+{% endblock %}
