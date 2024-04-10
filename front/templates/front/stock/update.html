@@ -1,0 +1,32 @@
+{% extends "front/base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}Atualização de Produtos{% endblock %}
+
+{% block conteudo %}
+<div class="container pt-5" style="margin-right: 25em;">
+    <div>
+        <h3 class="text-center pb-4">Atualização de Produtos</h3>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Nome</span>
+                {% render_field form.name class+="form-control" %}
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Data de validade</span>
+                {% render_field form.expiration class+="form-control" %}
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Tipo</span>
+                {% render_field form.product_type class+="form-control" %}
+            </div>
+            <button class="btn btn-primary">Atualizar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
